@@ -28,11 +28,11 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-          <Header/>
-          <SearchForm/>
+          <Header />
+          <SearchForm />
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
+      <Copyright sx={{ mt: 8, mb: 4 }} />
     </ThemeProvider>
   );
 }

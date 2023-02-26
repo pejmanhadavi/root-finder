@@ -4,7 +4,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
+import VersesDiolag from './verses-diolag';
 import Box from '@mui/material/Box';
 
 export function SearchForm() {
@@ -69,14 +69,7 @@ export function SearchForm() {
                 label="Use similarity (not recommended)"
             />
             
-            <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-            >
-                Search
-            </Button>
+            <VersesDiolag/>
             <Grid container>
                 <Grid item xs>
                     <Link href="#" variant="body2">
