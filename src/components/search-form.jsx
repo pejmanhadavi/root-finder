@@ -7,14 +7,30 @@ import VersesDiolag from './verses-diolag';
 import Box from '@mui/material/Box';
 import { ListOfBooks } from './list-of-books-diolog';
 import { HowToSearch } from './how-to-search';
+import { useState } from 'react';
+import Button from '@mui/material/Button';
 
 export function SearchForm() {
+    const [formInputData, setFormInputData] = useState({});
+    const [openVerses, setOpenVerses] = useState(false);
+
+    const handleCloseVerses = () => {
+        setOpenVerses(false);
+    }
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('main-roots'),
+        setFormInputData({
+            mainRoots: data.get('mainRoots'),
+            firstIgnoredChars: data.get('firstIgnoredChars'),
+            lastIgnoredChars: data.get('lastIgnoredChars'),
+            maxLength: +data.get('maxLength'),
+            similarityPercent: +data.get('similarityPercent'),
+            shouldStartsWithRoots: data.get('shouldStartsWithRoots') === 'on',
+            couldOtherCharsExistBetweenRootsChars: data.get('couldOtherCharsExistBetweenRootsChars') === 'on',
+            useSimilarity: data.get('useSimilarity') === 'on',
         });
+        setOpenVerses(true);
     };
 
     return (
@@ -25,7 +41,7 @@ export function SearchForm() {
                 fullWidth
                 id="text"
                 label="Main Roots"
-                name="main-roots"
+                name="mainRoots"
                 autoFocus
             />
             <TextField
@@ -57,20 +73,29 @@ export function SearchForm() {
                 type="number"
             />
             <FormControlLabel
-                control={<Checkbox value="shouldStartsWithRoots" color="primary" />}
+                control={<Checkbox name="shouldStartsWithRoots" color="primary" />}
                 label="Should starts with roots"
             />
             <FormControlLabel
-                control={<Checkbox value="couldOtherCharsExistBetweenRootsChars" color="primary" />}
+                control={<Checkbox name="couldOtherCharsExistBetweenRootsChars" color="primary" />}
                 label="Could other chars exist between roots chars"
             />
 
             <FormControlLabel
-                control={<Checkbox value="useSimilarity" color="primary" />}
+                control={<Checkbox name="useSimilarity" color="primary" />}
                 label="Use similarity (not recommended)"
             />
 
-            <VersesDiolag />
+            <Button
+                // onClick={handleClickOpen}
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+            >
+                Search
+            </Button>
+            <VersesDiolag open={openVerses} handleClose={handleCloseVerses} inputData={formInputData} />
             <Grid container>
                 <Grid item xs>
                     <HowToSearch />

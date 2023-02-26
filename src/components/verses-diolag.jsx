@@ -16,32 +16,17 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function FullScreenDialog() {
-    const [open, setOpen] = React.useState(false);
+export default function FullScreenDialog(props) {
+    console.log(props)
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
 
     return (
         <div>
-            <Button
-                onClick={handleClickOpen}
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-            >
-                Search
-            </Button>
+            
             <Dialog
                 fullScreen
-                open={open}
-                onClose={handleClose}
+                open={props.open}
+                onClose={props.handleClose}
                 TransitionComponent={Transition}
             >
                 <AppBar sx={{ position: 'relative' }}>
@@ -49,7 +34,7 @@ export default function FullScreenDialog() {
                         <IconButton
                             edge="start"
                             color="inherit"
-                            onClick={handleClose}
+                            onClick={props.handleClose}
                             aria-label="close"
                         >
                             <CloseIcon />
@@ -57,7 +42,7 @@ export default function FullScreenDialog() {
                         <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                             Sound
                         </Typography>
-                        <Button autoFocus color="inherit" onClick={handleClose}>
+                        <Button autoFocus color="inherit" onClick={props.handleClose}>
                             save
                         </Button>
                     </Toolbar>
