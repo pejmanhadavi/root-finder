@@ -2,10 +2,11 @@
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import VersesDiolag from './verses-diolag';
 import Box from '@mui/material/Box';
+import { ListOfBooks } from './list-of-books-diolog';
+import { HowToSearch } from './how-to-search';
 
 export function SearchForm() {
     const handleSubmit = (event) => {
@@ -72,14 +73,10 @@ export function SearchForm() {
             <VersesDiolag/>
             <Grid container>
                 <Grid item xs>
-                    <Link href="#" variant="body2">
-                        Don't know how to search?
-                    </Link>
+                    <HowToSearch/>
                 </Grid>
                 <Grid item>
-                    <Link href="#" variant="body2">
-                        List of holy books
-                    </Link>
+                    <ListOfBooks/>
                 </Grid>
             </Grid>
         </Box>
