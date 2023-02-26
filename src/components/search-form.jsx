@@ -9,10 +9,12 @@ import { ListOfBooks } from './list-of-books-diolog';
 import { HowToSearch } from './how-to-search';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
+import Search from '../search-engine';
 
 export function SearchForm() {
     const [formInputData, setFormInputData] = useState({});
     const [openVerses, setOpenVerses] = useState(false);
+    const [verses, setVerses] = useState([]);
 
     const handleCloseVerses = () => {
         setOpenVerses(false);
@@ -20,7 +22,7 @@ export function SearchForm() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        setFormInputData({
+        const inputData = {
             mainRoots: data.get('mainRoots'),
             firstIgnoredChars: data.get('firstIgnoredChars'),
             lastIgnoredChars: data.get('lastIgnoredChars'),
@@ -29,7 +31,9 @@ export function SearchForm() {
             shouldStartsWithRoots: data.get('shouldStartsWithRoots') === 'on',
             couldOtherCharsExistBetweenRootsChars: data.get('couldOtherCharsExistBetweenRootsChars') === 'on',
             useSimilarity: data.get('useSimilarity') === 'on',
-        });
+        };
+        setFormInputData(inputData);
+        setVerses(Search(inputData));
         setOpenVerses(true);
     };
 

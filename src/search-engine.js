@@ -3,14 +3,16 @@ const stringSimilarity = require("string-similarity-js").stringSimilarity;
 
 
 export default function Search(
-    mainRoots,
+    {mainRoots,
     wordMaxLength,
     useSimilarity,
-    similarity,
-    couldBeAnotherCharsBetweenRootChars,
+    similarityPercent,
+    couldOtherCharsExistBetweenRootsChars,
     shouldStartsWithRoots,
     firstIngnoredChars,
-    lastIgnoredChars,) {
+    lastIgnoredChars},) {
+    
+    similarityPercent = similarityPercent && similarityPercent / 100; 
 
     /**********
      * Read books
@@ -42,12 +44,12 @@ export default function Search(
                 /*********
                  * Check betweenChars
                  */
-                (couldBeAnotherCharsBetweenRootChars ? mainRoots.some(root => compareStringsWithBetweenChars(root, word)) :
+                (couldOtherCharsExistBetweenRootsChars ? mainRoots.some(root => compareStringsWithBetweenChars(root, word)) :
                     /*******
                      * Check similarity
                      */
                     (useSimilarity ?
-                        mainRoots.some(root => stringSimilarity(root, word, 1) > similarity) :
+                        mainRoots.some(root => stringSimilarity(root, word, 1) > similarityPercent) :
                         /*********
                          * Check including
                          */
