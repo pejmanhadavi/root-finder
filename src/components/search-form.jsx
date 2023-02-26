@@ -13,9 +13,9 @@ export function SearchForm() {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         console.log({
-          email: data.get('main-roots'),
+            email: data.get('main-roots'),
         });
-      };
+    };
 
     return (
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -69,14 +69,14 @@ export function SearchForm() {
                 control={<Checkbox value="useSimilarity" color="primary" />}
                 label="Use similarity (not recommended)"
             />
-            
-            <VersesDiolag/>
+
+            <VersesDiolag />
             <Grid container>
                 <Grid item xs>
-                    <HowToSearch/>
+                    <HowToSearch />
                 </Grid>
                 <Grid item>
-                    <ListOfBooks/>
+                    <ListOfBooks />
                 </Grid>
             </Grid>
         </Box>
