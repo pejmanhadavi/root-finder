@@ -16,15 +16,15 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function FullScreenDialog(props) {
+export default function FullScreenDialog({open, handleClose, verses}) {
 
     return (
         <div>
 
             <Dialog
                 fullScreen
-                open={props.open}
-                onClose={props.handleClose}
+                open={open}
+                onClose={handleClose}
                 TransitionComponent={Transition}
             >
                 <AppBar sx={{ position: 'relative' }}>
@@ -32,7 +32,7 @@ export default function FullScreenDialog(props) {
                         <IconButton
                             edge="start"
                             color="inherit"
-                            onClick={props.handleClose}
+                            onClick={handleClose}
                             aria-label="close"
                         >
                             <CloseIcon />
@@ -40,14 +40,14 @@ export default function FullScreenDialog(props) {
                         <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                             Sound
                         </Typography>
-                        <Button autoFocus color="inherit" onClick={props.handleClose}>
+                        <Button autoFocus color="inherit" onClick={handleClose}>
                             save
                         </Button>
                     </Toolbar>
                 </AppBar>
                 <List>
                     {
-                        props.verses.map(item => {
+                        verses.map(item => {
                             const address = item.substring(0, 16);
                             const verse = item.substring(16, item.length);
                             return (
