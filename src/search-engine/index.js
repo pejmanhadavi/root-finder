@@ -27,7 +27,7 @@ export default function Search(
 
     const data = [];
     for(let i = 0 ; i < translitrationsLinesArray.length ; i++)  {
-        if (!usedBooks.some(item => translitrationsLinesArray[i].includes(item))) continue;
+        if (usedBooks.length && !usedBooks.some(item => translitrationsLinesArray[i].includes(item))) continue;
         const address = translitrationsLinesArray[i].substring(0, 16);
         const translitrationVerse = translitrationsLinesArray[i].substring(16, translitrationsLinesArray[i].length);
         const arrayOfWords = translitrationVerse.split(' ');
