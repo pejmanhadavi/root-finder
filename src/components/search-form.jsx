@@ -26,15 +26,15 @@ export function SearchForm() {
             mainRoots: data.get('mainRoots').split(','),
             firstIgnoredChars: data.get('firstIgnoredChars') ? data.get('firstIgnoredChars').split(',') : [],
             lastIgnoredChars: data.get('lastIgnoredChars') ? data.get('lastIgnoredChars').split(',') : [],
-            maxLength: +data.get('maxLength') || 0,
+            wordMaxLength: +data.get('maxLength') || 0,
             similarityPercent: +data.get('similarityPercent') || 0,
             shouldStartsWithRoots: data.get('shouldStartsWithRoots') === 'on',
             couldOtherCharsExistBetweenRootsChars: data.get('couldOtherCharsExistBetweenRootsChars') === 'on',
             useSimilarity: data.get('useSimilarity') === 'on',
         };
         setFormInputData(inputData);
-        setVerses(Search(inputData));
-        console.log(verses);
+        const searchResult = Search(inputData);
+        setVerses(searchResult);
         setOpenVerses(true);
     };
 

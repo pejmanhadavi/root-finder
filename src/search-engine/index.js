@@ -2,15 +2,15 @@ import { holyBooksArabicText } from '../data/holy-books-arabic-alphabet'
 import { stringSimilarity } from "string-similarity-js";
 
 export default function Search(
-    {mainRoots,
-    wordMaxLength,
-    useSimilarity,
-    similarityPercent,
-    couldOtherCharsExistBetweenRootsChars,
-    shouldStartsWithRoots,
-    firstIgnoredChars,
-    lastIgnoredChars},) {
-    
+    {mainRoots = {},
+    wordMaxLength = 0,
+    useSimilarity = 0,
+    similarityPercent = 0,
+    couldOtherCharsExistBetweenRootsChars = 0,
+    shouldStartsWithRoots = 0,
+    firstIgnoredChars = [],
+    lastIgnoredChars = []}) {
+
     similarityPercent = similarityPercent && similarityPercent / 100; 
 
     /**********
@@ -67,12 +67,11 @@ export default function Search(
                  * Mention word in verses
                  */
                 arrayLines[i] = arrayLines[i].replace(initialWord, `<<* ${initialWord} *>>`)
-
-
                 data.push(arrayLines[i]);
             }
         })
     }
+    return data;
 }
 
 function compareStringsWithBetweenChars(root, word) {
