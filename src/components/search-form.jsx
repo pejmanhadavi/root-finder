@@ -35,6 +35,7 @@ export function SearchForm() {
             couldOtherCharsExistBetweenRootsChars: data.get('couldOtherCharsExistBetweenRootsChars') === 'on',
             useSimilarity: data.get('useSimilarity') === 'on',
         };
+        console.log(data.get('******************************', 'listOfBooks'));
         setFormInputData(inputData);
         const searchResult = Search(inputData);
         setVerses(searchResult);
