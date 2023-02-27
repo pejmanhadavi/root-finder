@@ -1,7 +1,8 @@
-const fs = require('fs');
+import allBooksInArabics from './Holy-Books---Arabic-Alphabet.txt';
 const stringSimilarity = require("string-similarity-js").stringSimilarity;
 
 
+console.log('*****************', allBooksInArabics)
 export default function Search(
     {mainRoots,
     wordMaxLength,
@@ -9,7 +10,7 @@ export default function Search(
     similarityPercent,
     couldOtherCharsExistBetweenRootsChars,
     shouldStartsWithRoots,
-    firstIngnoredChars,
+    firstIgnoredChars,
     lastIgnoredChars},) {
     
     similarityPercent = similarityPercent && similarityPercent / 100; 
@@ -17,7 +18,6 @@ export default function Search(
     /**********
      * Read books
      */
-    let allBooksInArabics = fs.readFileSync('./public/Holy-Books---Arabic-Alphabet.txt', { encoding: 'utf8' });
     const arrayLines = allBooksInArabics.split('\n');
 
     const data = [];
@@ -28,8 +28,8 @@ export default function Search(
             /********
              * Remove first chars
              */
-            for (let i = 0; i < firstIngnoredChars.length; i++) {
-                word = word.startsWith(firstIngnoredChars[i]) ? word.substring(firstIngnoredChars[i].length) : word;
+            for (let i = 0; i < firstIgnoredChars.length; i++) {
+                word = word.startsWith(firstIgnoredChars[i]) ? word.substring(firstIgnoredChars[i].length) : word;
             }
 
             /********

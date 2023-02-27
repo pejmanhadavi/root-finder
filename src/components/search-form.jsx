@@ -23,17 +23,18 @@ export function SearchForm() {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         const inputData = {
-            mainRoots: data.get('mainRoots'),
-            firstIgnoredChars: data.get('firstIgnoredChars'),
-            lastIgnoredChars: data.get('lastIgnoredChars'),
-            maxLength: +data.get('maxLength'),
-            similarityPercent: +data.get('similarityPercent'),
+            mainRoots: data.get('mainRoots').split(','),
+            firstIgnoredChars: data.get('firstIgnoredChars') ? data.get('firstIgnoredChars').split(',') : [],
+            lastIgnoredChars: data.get('lastIgnoredChars') ? data.get('lastIgnoredChars').split(',') : [],
+            maxLength: +data.get('maxLength') || 0,
+            similarityPercent: +data.get('similarityPercent') || 0,
             shouldStartsWithRoots: data.get('shouldStartsWithRoots') === 'on',
             couldOtherCharsExistBetweenRootsChars: data.get('couldOtherCharsExistBetweenRootsChars') === 'on',
             useSimilarity: data.get('useSimilarity') === 'on',
         };
         setFormInputData(inputData);
         setVerses(Search(inputData));
+        console.log(verses);
         setOpenVerses(true);
     };
 
