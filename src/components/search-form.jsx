@@ -44,7 +44,6 @@ export function SearchForm() {
                 margin="normal"
                 required
                 fullWidth
-                id="text"
                 label="Main Roots"
                 name="mainRoots"
                 autoFocus
@@ -92,7 +91,6 @@ export function SearchForm() {
             />
 
             <Button
-                // onClick={handleClickOpen}
                 type="submit"
                 fullWidth
                 variant="contained"

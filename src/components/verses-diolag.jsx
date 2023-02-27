@@ -97,10 +97,13 @@ export default function FullScreenDialog({ open, handleClose, verses, inputData 
                         verses.map(item => {
                             const address = item.substring(0, 16);
                             const verse = item.substring(16, item.length);
+                            const firstPartOfVerse = verse.substring(0, verse.indexOf('{'));
+                            const foundWord = verse.substring(verse.indexOf('{') + 1, verse.indexOf('}'));
+                            const lastPartOfVerse = verse.substring(verse.indexOf('}') + 1, verse.length);
                             return (
                                 <React.Fragment dir="rtl">
                                     <ListItem>
-                                        <ListItemText primary={verse} secondary={address} />
+                                        <ListItemText primary={<span>{firstPartOfVerse}<span style={{color: 'red', fontSize: '1.4rem'}}>{foundWord}</span>{lastPartOfVerse}</span>} secondary={address} />
                                     </ListItem>
                                     <Divider />
                                 </React.Fragment>
