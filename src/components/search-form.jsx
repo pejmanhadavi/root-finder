@@ -18,7 +18,9 @@ export function SearchForm() {
     const [formInputData, setFormInputData] = useState({});
     const [openVerses, setOpenVerses] = useState(false);
     const [verses, setVerses] = useState([]);
+    const [books, setBooks] = useState([]);
 
+    const handleBooksAutoCompleteChange = (event, value) => setBooks(value.map(item => item.label));
     const handleCloseVerses = () => {
         setOpenVerses(false);
     }
@@ -34,8 +36,8 @@ export function SearchForm() {
             shouldStartsWithRoots: data.get('shouldStartsWithRoots') === 'on',
             couldOtherCharsExistBetweenRootsChars: data.get('couldOtherCharsExistBetweenRootsChars') === 'on',
             useSimilarity: data.get('useSimilarity') === 'on',
+            usedBooks: books,
         };
-        console.log(data.get('******************************', 'listOfBooks'));
         setFormInputData(inputData);
         const searchResult = Search(inputData);
         setVerses(searchResult);
@@ -56,18 +58,19 @@ export function SearchForm() {
             TODO: Fix margin with a best practice
                 */}
             <Autocomplete
-                sx={{mt: "16px", mb: "8px"}}
+                sx={{ mt: "16px", mb: "8px" }}
                 multiple
                 name="listOfBooks"
                 options={listOfBooksKeys}
                 getOptionLabel={(option) => option.label}
                 filterSelectedOptions
+                onChange={handleBooksAutoCompleteChange}
                 renderInput={(params) => (
-                <TextField
-                    {...params}
-                    label="filter selected books"
-                    placeholder="Choose"
-                />
+                    <TextField
+                        {...params}
+                        label="filter selected books"
+                        placeholder="Choose"
+                    />
                 )}
             />
             <TextField
@@ -134,46 +137,47 @@ export function SearchForm() {
 }
 
 
-const listOfBooksKeys = [{label: 'EXO'},
-{label: 'LEV'},
-{label: 'NUM'},
-{label: 'DEU'},
-{label: 'JOS'},
-{label: 'JDG'},
-{label: 'RUT'},
-{label: '1SA'},
-{label: '2SA'},
-{label: '1KI'},
-{label: '2KI'},
-{label: '1CH'},
-{label: '2CH'},
-{label: 'EZR'},
-{label: 'NEH'},
-{label: 'EST'},
-{label: 'JOB'},
-{label: 'PSA'},
-{label: 'PRO'},
-{label: 'ECC'},
-{label: 'SOL'},
-{label: 'ISA'},
-{label: 'JER'},
-{label: 'LAM'},
-{label: 'EZE'},
-{label: 'DAN'},
-{label: 'HOS'},
-{label: 'JOE'},
-{label: 'AMO'},
-{label: 'OBA'},
-{label: 'JON'},
-{label: 'MIC'},
-{label: 'NAH'},
-{label: 'HAB'},
-{label: 'ZEP'},
-{label: 'HAG'},
-{label: 'ZEC'},
-{label: 'MAL'},
-{label: 'MAT'},
-{label: 'MAR'},
-{label: 'LUK'},
-{label: 'JOH'},
-{label: 'QUR'}];
+const listOfBooksKeys = [
+    { label: 'EXO' },
+    { label: 'LEV' },
+    { label: 'NUM' },
+    { label: 'DEU' },
+    { label: 'JOS' },
+    { label: 'JDG' },
+    { label: 'RUT' },
+    { label: '1SA' },
+    { label: '2SA' },
+    { label: '1KI' },
+    { label: '2KI' },
+    { label: '1CH' },
+    { label: '2CH' },
+    { label: 'EZR' },
+    { label: 'NEH' },
+    { label: 'EST' },
+    { label: 'JOB' },
+    { label: 'PSA' },
+    { label: 'PRO' },
+    { label: 'ECC' },
+    { label: 'SOL' },
+    { label: 'ISA' },
+    { label: 'JER' },
+    { label: 'LAM' },
+    { label: 'EZE' },
+    { label: 'DAN' },
+    { label: 'HOS' },
+    { label: 'JOE' },
+    { label: 'AMO' },
+    { label: 'OBA' },
+    { label: 'JON' },
+    { label: 'MIC' },
+    { label: 'NAH' },
+    { label: 'HAB' },
+    { label: 'ZEP' },
+    { label: 'HAG' },
+    { label: 'ZEC' },
+    { label: 'MAL' },
+    { label: 'MAT' },
+    { label: 'MAR' },
+    { label: 'LUK' },
+    { label: 'JOH' },
+    { label: 'QUR' }];
