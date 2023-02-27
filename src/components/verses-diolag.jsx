@@ -42,7 +42,7 @@ export default function FullScreenDialog({ open, handleClose, verses, inputData 
                         </Typography>
                     </Toolbar>
                 </AppBar>
-                <Box
+                {/* <Box
                     sx={{
                         '& .MuiTextField-root': { mt: 4, ml: 1, mr: 1, width: '25ch' },
                     }}
@@ -91,7 +91,7 @@ export default function FullScreenDialog({ open, handleClose, verses, inputData 
                             defaultValue={inputData.useSimilarity ? 'On' : 'Off'}
                         />
                     </div>
-                </Box>
+                </Box> */}
                 <List>
                     {
                         verses.map(item => {
