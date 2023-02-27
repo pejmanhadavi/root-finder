@@ -13,6 +13,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Search from '../search-engine';
 
 
+
 export function SearchForm() {
     const [formInputData, setFormInputData] = useState({});
     const [openVerses, setOpenVerses] = useState(false);
@@ -57,7 +58,7 @@ export function SearchForm() {
                 sx={{mt: "16px", mb: "8px"}}
                 multiple
                 name="list of books"
-                options={top100Films}
+                options={listOfBooksKeys}
                 getOptionLabel={(option) => option.label}
                 filterSelectedOptions
                 renderInput={(params) => (
@@ -133,9 +134,46 @@ export function SearchForm() {
 }
 
 
-const top100Films = [
-    { label: 'The Shawshank Redemption', year: 1994 },
-    { label: 'The Godfather', year: 1972 },
-    { label: 'The Godfather: Part II', year: 1974 },
-    { label: 'The Dark Knight', year: 2008 },
-    { label: '12 Angry Men', year: 1957 },];
+const listOfBooksKeys = [{label: 'EXO'},
+{label: 'LEV'},
+{label: 'NUM'},
+{label: 'DEU'},
+{label: 'JOS'},
+{label: 'JDG'},
+{label: 'RUT'},
+{label: '1SA'},
+{label: '2SA'},
+{label: '1KI'},
+{label: '2KI'},
+{label: '1CH'},
+{label: '2CH'},
+{label: 'EZR'},
+{label: 'NEH'},
+{label: 'EST'},
+{label: 'JOB'},
+{label: 'PSA'},
+{label: 'PRO'},
+{label: 'ECC'},
+{label: 'SOL'},
+{label: 'ISA'},
+{label: 'JER'},
+{label: 'LAM'},
+{label: 'EZE'},
+{label: 'DAN'},
+{label: 'HOS'},
+{label: 'JOE'},
+{label: 'AMO'},
+{label: 'OBA'},
+{label: 'JON'},
+{label: 'MIC'},
+{label: 'NAH'},
+{label: 'HAB'},
+{label: 'ZEP'},
+{label: 'HAG'},
+{label: 'ZEC'},
+{label: 'MAL'},
+{label: 'MAT'},
+{label: 'MAR'},
+{label: 'LUK'},
+{label: 'JOH'},
+{label: 'QUR'}];
