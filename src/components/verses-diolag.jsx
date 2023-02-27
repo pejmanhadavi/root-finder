@@ -47,14 +47,17 @@ export default function FullScreenDialog(props) {
                 </AppBar>
                 <List>
                     {
-                        props.verses.map(item => (
-                            <React.Fragment>
+                        props.verses.map(item => {
+                            const address = item.substring(0, 16);
+                            const verse = item.substring(16, item.length);
+                            return (
+                            <React.Fragment dir="rtl">
                                 <ListItem>
-                                    <ListItemText primary={item} secondary="Titania" />
+                                    <ListItemText primary={verse} secondary={address}/>
                                 </ListItem>
                                 <Divider />
                             </React.Fragment>
-                        ))
+                        )})
                     }
                 </List>
             </Dialog>
