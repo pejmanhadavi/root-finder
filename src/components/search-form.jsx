@@ -19,11 +19,19 @@ export function SearchForm() {
     const [openVerses, setOpenVerses] = useState(false);
     const [verses, setVerses] = useState([]);
     const [books, setBooks] = useState([]);
+    const [mainRootsValue, setMainRootsValue] = useState();
+    const [loading, setLoading] = useState(false);
 
     const handleBooksAutoCompleteChange = (event, value) => setBooks(value.map(item => item.label));
     const handleCloseVerses = () => {
         setOpenVerses(false);
     }
+    const handleMainRootsChanges = (event) => {
+        event.preventDefault();
+        console.log(typeof mainRootsValue);
+        setMainRootsValue(event.target.value);
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -39,7 +47,9 @@ export function SearchForm() {
             usedBooks: books,
         };
         setFormInputData(inputData);
+        setLoading(true);
         const searchResult = Search(inputData);
+        setLoading(false);
         setVerses(searchResult);
         setOpenVerses(true);
     };
@@ -50,9 +60,11 @@ export function SearchForm() {
                 margin="normal"
                 required
                 fullWidth
+                // onChange={handleMainRootsChanges}
                 label="Main roots"
                 name="mainRoots"
                 autoFocus
+                helperText="Incorrect entry."
             />
             {/******
             TODO: Fix margin with a best practice
@@ -61,12 +73,14 @@ export function SearchForm() {
                 sx={{ mt: "16px", mb: "8px" }}
                 multiple
                 name="listOfBooks"
+                helperText="Incorrect entry."
                 options={listOfBooksKeys}
                 getOptionLabel={(option) => option.label}
                 filterSelectedOptions
                 onChange={handleBooksAutoCompleteChange}
                 renderInput={(params) => (
                     <TextField
+                        helperText="Check book information at the bottom of the form"
                         {...params}
                         label="filter selected books"
                         placeholder="Choose"
@@ -116,6 +130,7 @@ export function SearchForm() {
             />
 
             <Button
+                disabled={loading}
                 type="submit"
                 fullWidth
                 variant="contained"
