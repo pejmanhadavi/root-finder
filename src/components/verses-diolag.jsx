@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import ListItemText from '@mui/material/ListItemText';
 import ListItem from '@mui/material/ListItem';
@@ -54,17 +53,17 @@ export default function FullScreenDialog({ open, handleClose, verses, inputData 
                         <TextField
                             disabled
                             label="Main roots"
-                            defaultValue={inputData.mainRoots}
+                            defaultValue={inputData.mainRoots?.length ? inputData.mainRoots : 'Not Set'}
                         />
                         <TextField
                             disabled
                             label="First ignored chars"
-                            defaultValue={inputData.firstIgnoredChars.length ? inputData.firstIgnoredChars : 'Not set'}
+                            defaultValue={inputData.firstIgnoredChars?.length ? inputData.firstIgnoredChars : 'Not set'}
                         />
                         <TextField
                             disabled
                             label="Last ignored chars"
-                            defaultValue={inputData.lastIgnoredChars.length ? inputData.lastIgnoredChars : 'Not set'}
+                            defaultValue={inputData.lastIgnoredChars?.length ? inputData.lastIgnoredChars : 'Not set'}
                         />
                         <TextField
                             disabled
