@@ -17,12 +17,10 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function FullScreenDialog(props) {
-    console.log(props)
-
 
     return (
         <div>
-            
+
             <Dialog
                 fullScreen
                 open={props.open}
@@ -48,16 +46,16 @@ export default function FullScreenDialog(props) {
                     </Toolbar>
                 </AppBar>
                 <List>
-                    <ListItem button>
-                        <ListItemText primary="Phone ringtone" secondary="Titania" />
-                    </ListItem>
-                    <Divider />
-                    <ListItem button>
-                        <ListItemText
-                            primary="Default notification ringtone"
-                            secondary="Tethys"
-                        />
-                    </ListItem>
+                    {
+                        props.verses.map(item => (
+                            <React.Fragment>
+                                <ListItem>
+                                    <ListItemText primary={item} secondary="Titania" />
+                                </ListItem>
+                                <Divider />
+                            </React.Fragment>
+                        ))
+                    }
                 </List>
             </Dialog>
         </div>

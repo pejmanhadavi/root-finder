@@ -100,7 +100,7 @@ export function SearchForm() {
             >
                 Search
             </Button>
-            <VersesDiolag open={openVerses} handleClose={handleCloseVerses} inputData={formInputData} />
+            <VersesDiolag open={openVerses} handleClose={handleCloseVerses} inputData={formInputData} verses={verses} />
             <Grid container>
                 <Grid item xs>
                     <HowToSearch />
