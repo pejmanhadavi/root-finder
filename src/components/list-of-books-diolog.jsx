@@ -76,8 +76,8 @@ export function ListOfBooks() {
                 </BootstrapDialogTitle>
                 <DialogContent dividers>
                     <Typography gutterBottom sx={{width: '50'}}>
-                        {listOfBooksArray.map(item => (
-                            <p>
+                        {listOfBooksArray.map((item, i) => (
+                            <p key={i}>
                                 {item}
                             </p>
                         ))}

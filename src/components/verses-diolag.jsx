@@ -43,13 +43,13 @@ export default function FullScreenDialog({ open, handleClose, verses, inputData 
                 </AppBar>
                 <List>
                     {
-                        verses.map(item => {
+                        verses.map((item, i) => {
                             const verse = item.translitration;
                             const firstPartOfVerse = verse.substring(0, verse.indexOf('{'));
                             const foundWord = verse.substring(verse.indexOf('{') + 1, verse.indexOf('}'));
                             const lastPartOfVerse = verse.substring(verse.indexOf('}') + 1, verse.length);
                             return (
-                                <React.Fragment>
+                                <React.Fragment key={i}>
                                     <ListItem>
                                         <ListItemText primary={<span>{firstPartOfVerse}<span style={{ color: 'red', fontSize: '1.4rem' }}>{foundWord}</span>{lastPartOfVerse}</span>} secondary={item.address} />
                                     </ListItem>

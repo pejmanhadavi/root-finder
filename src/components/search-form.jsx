@@ -57,13 +57,12 @@ export function SearchForm() {
             <Autocomplete
                 sx={{mt: "16px", mb: "8px"}}
                 multiple
-                name="list of books"
+                name="listOfBooks"
                 options={listOfBooksKeys}
                 getOptionLabel={(option) => option.label}
                 filterSelectedOptions
                 renderInput={(params) => (
                 <TextField
-                    margin='0'
                     {...params}
                     label="filter selected books"
                     placeholder="Choose"
