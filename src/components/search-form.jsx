@@ -9,7 +9,9 @@ import { ListOfBooks } from './list-of-books-diolog';
 import { HowToSearch } from './how-to-search';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
+import Autocomplete from '@mui/material/Autocomplete';
 import Search from '../search-engine';
+
 
 export function SearchForm() {
     const [formInputData, setFormInputData] = useState({});
@@ -44,9 +46,28 @@ export function SearchForm() {
                 margin="normal"
                 required
                 fullWidth
-                label="Main Roots"
+                label="Main roots"
                 name="mainRoots"
                 autoFocus
+            />
+            {/******
+            TODO: Fix margin with a best practice
+                */}
+            <Autocomplete
+                sx={{mt: "16px", mb: "8px"}}
+                multiple
+                name="list of books"
+                options={top100Films}
+                getOptionLabel={(option) => option.label}
+                filterSelectedOptions
+                renderInput={(params) => (
+                <TextField
+                    margin='0'
+                    {...params}
+                    label="filter selected books"
+                    placeholder="Choose"
+                />
+                )}
             />
             <TextField
                 margin="normal"
@@ -110,3 +131,11 @@ export function SearchForm() {
         </Box>
     );
 }
+
+
+const top100Films = [
+    { label: 'The Shawshank Redemption', year: 1994 },
+    { label: 'The Godfather', year: 1972 },
+    { label: 'The Godfather: Part II', year: 1974 },
+    { label: 'The Dark Knight', year: 2008 },
+    { label: '12 Angry Men', year: 1957 },];

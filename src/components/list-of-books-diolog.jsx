@@ -64,7 +64,7 @@ export function ListOfBooks() {
     return (
         <div>
             <Link href="#" variant="body2" onClick={handleClickOpen}>
-                List of supported books with they keys
+                Books infomation
             </Link>
             <BootstrapDialog
                 onClose={handleClose}
@@ -72,10 +72,10 @@ export function ListOfBooks() {
                 open={open}
             >
                 <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    List of holy books
+                    List of books
                 </BootstrapDialogTitle>
                 <DialogContent dividers>
-                    <Typography gutterBottom>
+                    <Typography gutterBottom sx={{width: '50'}}>
                         {listOfBooksArray.map(item => (
                             <p>
                                 {item}
