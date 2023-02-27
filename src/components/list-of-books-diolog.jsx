@@ -8,6 +8,10 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import { listOfBooks } from '../data/list-of-books';
+
+
+const listOfBooksArray = listOfBooks.split('\n');
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -60,7 +64,7 @@ export function ListOfBooks() {
     return (
         <div>
             <Link href="#" variant="body2" onClick={handleClickOpen}>
-                List of holy books
+                List of supported books with they keys
             </Link>
             <BootstrapDialog
                 onClose={handleClose}
@@ -68,22 +72,15 @@ export function ListOfBooks() {
                 open={open}
             >
                 <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    Modal title
+                    List of holy books
                 </BootstrapDialogTitle>
                 <DialogContent dividers>
                     <Typography gutterBottom>
-                        Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-                        dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-                        consectetur ac, vestibulum at eros.
-                    </Typography>
-                    <Typography gutterBottom>
-                        Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-                        Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
-                    </Typography>
-                    <Typography gutterBottom>
-                        Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
-                        magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec
-                        ullamcorper nulla non metus auctor fringilla.
+                        {listOfBooksArray.map(item => (
+                            <p>
+                                {item}
+                            </p>
+                        ))}
                     </Typography>
                 </DialogContent>
             </BootstrapDialog>
