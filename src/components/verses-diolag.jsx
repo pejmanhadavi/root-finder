@@ -48,16 +48,11 @@ export default function FullScreenDialog({ open, handleClose, verses, inputData 
                             const firstPartOfVerse = verse.substring(0, verse.indexOf('{'));
                             const foundWord = verse.substring(verse.indexOf('{') + 1, verse.indexOf('}'));
                             const lastPartOfVerse = verse.substring(verse.indexOf('}') + 1, verse.length);
-                            console.log(item.trueLang);
                             return (
                                 <React.Fragment>
                                     <ListItem>
-                                        <ListItemText primary={item.trueLang} />
-                                    </ListItem>
-                                    <ListItem>
                                         <ListItemText primary={<span>{firstPartOfVerse}<span style={{ color: 'red', fontSize: '1.4rem' }}>{foundWord}</span>{lastPartOfVerse}</span>} secondary={item.address} />
                                     </ListItem>
-                                    <Divider />
                                     <Divider />
                                 </React.Fragment>
                             )
