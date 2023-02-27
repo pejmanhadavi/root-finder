@@ -26,7 +26,7 @@ export default function Search(
     const data = [];
     for(let i = 0 ; i < translitrationsLinesArray.length ; i++)  {
         const address = translitrationsLinesArray[i].substring(0, 16);
-        const translitrationVerse = translitrationsLinesArray[i].substring(16, translitrationsLinesArray[i].length);
+        const translitrationVerse = translitrationsLinesArray[i].substring(15, translitrationsLinesArray[i].length);
         const arrayOfWords = translitrationVerse.split(' ');
         
         arrayOfWords.forEach(word => {
@@ -75,10 +75,12 @@ export default function Search(
                  * Mention word in verses
                  */
                 
-                const trueLangVerse = trueLangsLinesArray.find(line => line.includes(address)).substring(15, translitrationsLinesArray[i].length);
+                const wordIndex = translitrationVerse.indexOf(word);
+                const trueLangVerse = trueLangsLinesArray.find(line => line.includes(address)).substring(16, translitrationsLinesArray[i].length);
+                const trueLangWord = trueLangVerse.substring(wordIndex, wordIndex + word.length);
                 const dataLine = {
                     address,
-                    trueLang: trueLangVerse,
+                    trueLang: trueLangVerse.replace(trueLangWord, `${trueLangWord}`),
                     translitration: translitrationVerse.replace(initialWord, `{${initialWord}}`),
                     translation: 'test translations',
                 };

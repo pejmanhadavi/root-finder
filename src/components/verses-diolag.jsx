@@ -18,7 +18,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function FullScreenDialog({ open, handleClose, verses, inputData }) {
-    console.log(verses);
     return (
         <div>
             <Dialog
@@ -38,7 +37,7 @@ export default function FullScreenDialog({ open, handleClose, verses, inputData 
                             <CloseIcon />
                         </IconButton>
                         <Typography sx={{ ml: 2, flex: 1 }} component="div">
-                            Found <span style={{fontSize: '1.4rem'}}>{verses.length}</span> Results For:  <span style={{fontSize: '1.4rem'}}>{inputData?.mainRoots?.join(',')}</span>
+                            Found <span style={{ fontSize: '1.4rem' }}>{verses.length}</span> Results For:  <span style={{ fontSize: '1.4rem' }}>{inputData?.mainRoots?.join(',')}</span>
                         </Typography>
                     </Toolbar>
                 </AppBar>
@@ -49,11 +48,16 @@ export default function FullScreenDialog({ open, handleClose, verses, inputData 
                             const firstPartOfVerse = verse.substring(0, verse.indexOf('{'));
                             const foundWord = verse.substring(verse.indexOf('{') + 1, verse.indexOf('}'));
                             const lastPartOfVerse = verse.substring(verse.indexOf('}') + 1, verse.length);
+                            console.log(item.trueLang);
                             return (
                                 <React.Fragment>
                                     <ListItem>
-                                        <ListItemText primary={<span>{firstPartOfVerse}<span style={{color: 'red', fontSize: '1.4rem'}}>{foundWord}</span>{lastPartOfVerse}</span>} secondary={item.address} />
+                                        <ListItemText primary={item.trueLang} />
                                     </ListItem>
+                                    <ListItem>
+                                        <ListItemText primary={<span>{firstPartOfVerse}<span style={{ color: 'red', fontSize: '1.4rem' }}>{foundWord}</span>{lastPartOfVerse}</span>} secondary={item.address} />
+                                    </ListItem>
+                                    <Divider />
                                     <Divider />
                                 </React.Fragment>
                             )
