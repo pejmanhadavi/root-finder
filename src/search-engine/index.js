@@ -66,7 +66,7 @@ export default function Search(
                 /*******
                  * Mention word in verses
                  */
-                arrayLines[i] = arrayLines[i].replace(initialWord, `<<* ${initialWord} *>>`)
+                arrayLines[i] = arrayLines[i].replace(initialWord, `{${initialWord}}`)
                 data.push(arrayLines[i]);
             }
         })
