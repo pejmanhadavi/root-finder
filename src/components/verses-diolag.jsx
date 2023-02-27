@@ -37,8 +37,8 @@ export default function FullScreenDialog({ open, handleClose, verses, inputData 
                         >
                             <CloseIcon />
                         </IconButton>
-                        <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                            Found {verses.length} Results
+                        <Typography sx={{ ml: 2, flex: 1 }} component="div">
+                            Found {verses.length} Results For:  <span style={{fontSize: '1.4rem'}}>{inputData.mainRoots}</span>
                         </Typography>
                     </Toolbar>
                 </AppBar>
