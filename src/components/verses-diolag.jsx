@@ -18,8 +18,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function FullScreenDialog({ open, handleClose, verses, inputData }) {
-
-    console.log(inputData.mainRoots);
+    console.log(verses);
     return (
         <div>
             <Dialog
@@ -43,68 +42,17 @@ export default function FullScreenDialog({ open, handleClose, verses, inputData 
                         </Typography>
                     </Toolbar>
                 </AppBar>
-                {/* <Box
-                    sx={{
-                        '& .MuiTextField-root': { mt: 4, ml: 1, mr: 1, width: '25ch' },
-                    }}
-                    noValidate
-                    autoComplete="off"
-                >
-                    <div>
-                        <TextField
-                            disabled
-                            label="Main roots"
-                            defaultValue={inputData.mainRoots?.length ? inputData.mainRoots : 'Not Set'}
-                        />
-                        <TextField
-                            disabled
-                            label="First ignored chars"
-                            defaultValue={inputData.firstIgnoredChars?.length ? inputData.firstIgnoredChars : 'Not set'}
-                        />
-                        <TextField
-                            disabled
-                            label="Last ignored chars"
-                            defaultValue={inputData.lastIgnoredChars?.length ? inputData.lastIgnoredChars : 'Not set'}
-                        />
-                        <TextField
-                            disabled
-                            label="Max length"
-                            defaultValue={inputData.wordMaxLength || 'Not set'}
-                        />
-                        <TextField
-                            disabled
-                            label="Similarity percent"
-                            defaultValue={inputData.similarityPercent || 'Not set'}
-                        />
-                        <TextField
-                            disabled
-                            label="Should starts withRoots"
-                            defaultValue={inputData.shouldStartsWithRoots ? 'On' : 'Off'}
-                        />
-                        <TextField
-                            disabled
-                            label="Could other chars exst"
-                            defaultValue={inputData.couldOtherCharsExistBetweenRootsChars ? 'On' : 'Off'}
-                        />
-                        <TextField
-                            disabled
-                            label="Use similarity"
-                            defaultValue={inputData.useSimilarity ? 'On' : 'Off'}
-                        />
-                    </div>
-                </Box> */}
                 <List>
                     {
                         verses.map(item => {
-                            const address = item.substring(0, 16);
-                            const verse = item.substring(16, item.length);
+                            const verse = item.translitration;
                             const firstPartOfVerse = verse.substring(0, verse.indexOf('{'));
                             const foundWord = verse.substring(verse.indexOf('{') + 1, verse.indexOf('}'));
                             const lastPartOfVerse = verse.substring(verse.indexOf('}') + 1, verse.length);
                             return (
                                 <React.Fragment>
                                     <ListItem>
-                                        <ListItemText primary={<span>{firstPartOfVerse}<span style={{color: 'red', fontSize: '1.4rem'}}>{foundWord}</span>{lastPartOfVerse}</span>} secondary={address} />
+                                        <ListItemText primary={<span>{firstPartOfVerse}<span style={{color: 'red', fontSize: '1.4rem'}}>{foundWord}</span>{lastPartOfVerse}</span>} secondary={item.address} />
                                     </ListItem>
                                     <Divider />
                                 </React.Fragment>
