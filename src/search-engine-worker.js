@@ -104,8 +104,7 @@ function compareStringsWithBetweenChars(root, word) {
 };
 
 // eslint-disable-next-line no-restricted-globals
-addEventListener('message', e => {
-    if (e.data === 'hello') {
-      postMessage('hiya!');
-    }
+addEventListener('search', e => {
+    const verses = Search(e.data);
+    postMessage(verses);
 });
