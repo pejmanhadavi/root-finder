@@ -15,13 +15,14 @@ import Worker from 'web-worker';
 
 
 export function SearchForm() {
-    const url = new URL('../worker.js', import.meta.url);
+    const url = new URL('../search-engine-worker.js', import.meta.url);
     const worker = new Worker(url);
 
     worker.addEventListener('message', e => {
-        console.log(e.data)  // "hiya!"
+        setVerses(e.data);
+        setLoading(false);
+        setOpenVerses(true);
     });
-    worker.postMessage({json: "json"});
 
     const [formInputData, setFormInputData] = useState({});
     const [openVerses, setOpenVerses] = useState(false);
@@ -49,12 +50,8 @@ export function SearchForm() {
             usedBooks: books,
         };
         setFormInputData(inputData);
-        // setLoading(true);
-        // const searchResult = Search(inputData);
+        setLoading(true);
         worker.postMessage(inputData);
-        // setLoading(false);
-        // setVerses(searchResult);
-        // setOpenVerses(true);
     };
 
     return (
