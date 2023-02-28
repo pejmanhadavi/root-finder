@@ -60,7 +60,7 @@ export function HowToSearch() {
     return (
         <div>
             <Link href="#" variant="body2" onClick={handleClickOpen}>
-                Don't know how to search?
+                Search Examples
             </Link>
             <BootstrapDialog
                 onClose={handleClose}
@@ -68,7 +68,7 @@ export function HowToSearch() {
                 open={open}
             >
                 <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    Modal title
+                    Search examples
                 </BootstrapDialogTitle>
                 <DialogContent dividers>
                     <Typography gutterBottom>

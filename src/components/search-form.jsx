@@ -29,6 +29,9 @@ export function SearchForm() {
     const [verses, setVerses] = useState([]);
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [mainRootsError, setMainRootsError] = useState(true);
+    const [firstIgnoredError, setFirstIgnoredError] = useState(false);
+    const [lastIgnoredError, setLastIgnoredError] = useState(false);
 
     const handleBooksAutoCompleteChange = (event, value) => setBooks(value.map(item => item.label));
     const handleCloseVerses = () => {
@@ -49,10 +52,42 @@ export function SearchForm() {
             useSimilarity: data.get('useSimilarity') === 'on',
             usedBooks: books,
         };
-        setFormInputData(inputData);
-        setLoading(true);
-        worker.postMessage(inputData);
+        if (!mainRootsError && !firstIgnoredError && !lastIgnoredError) {
+            setFormInputData(inputData);
+            setLoading(true);
+            worker.postMessage(inputData);
+        }
     };
+
+    const handleMainRootsChanges = (e) => {
+        e.preventDefault();
+        const value = e.target.value;
+        if (
+            value.length === 0 ||
+            value === '<empty string>' ||
+            value.indexOf(' ') === 0 ||
+            value.lastIndexOf(' ') === (value.length - 1)
+        ) setMainRootsError(true);
+        else setMainRootsError(false);
+    }
+
+    const handleFirstIgnoredChanges = (e) => {
+        e.preventDefault();
+        const value = e.target.value;
+        if (value.length && (value.indexOf(' ') === 0 ||
+            value.lastIndexOf(' ') === (value.length - 1))
+        ) setFirstIgnoredError(true);
+        else setFirstIgnoredError(false);
+    }
+
+    const handleLastIgnoredChanges = (e) => {
+        e.preventDefault();
+        const value = e.target.value;
+        if (value.length && (value.indexOf(' ') === 0 ||
+            value.lastIndexOf(' ') === (value.length - 1))
+        ) setLastIgnoredError(true);
+        else setLastIgnoredError(false);
+    }
 
     return (
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -60,10 +95,11 @@ export function SearchForm() {
                 margin="normal"
                 required
                 fullWidth
-                // onChange={handleMainRootsChanges}
+                onChange={handleMainRootsChanges}
                 label="Main roots"
                 name="mainRoots"
                 autoFocus
+                error={mainRootsError}
                 helperText="Should not be empty, split multi roots with space"
             />
             {/******
@@ -93,11 +129,15 @@ export function SearchForm() {
                 name="firstIgnoredChars"
                 label="First ignored chars"
                 type="text"
+                error={firstIgnoredError}
+                onChange={handleFirstIgnoredChanges}
                 helperText="Split multi ignored chars with space"
             />
             <TextField
                 margin="normal"
                 fullWidth
+                onChange={handleLastIgnoredChanges}
+                error={lastIgnoredError}
                 name="lastIgnoredChars"
                 label="Last ignored chars"
                 type="text"
