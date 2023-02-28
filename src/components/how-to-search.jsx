@@ -72,18 +72,19 @@ export function HowToSearch() {
                 </BootstrapDialogTitle>
                 <DialogContent dividers>
                     <Typography gutterBottom>
-                        Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-                        dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-                        consectetur ac, vestibulum at eros.
+                        Main roots: حش خش فعل
                     </Typography>
                     <Typography gutterBottom>
-                        Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-                        Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+                        First ignored chars: ال ف بر
                     </Typography>
                     <Typography gutterBottom>
-                        Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
-                        magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec
-                        ullamcorper nulla non metus auctor fringilla.
+                        Last ignored chars: ان اون یت
+                    </Typography>
+                    <Typography gutterBottom>
+                        Max length: 5
+                    </Typography>
+                    <Typography gutterBottom>
+                        Similarity percent: 57
                     </Typography>
                 </DialogContent>
             </BootstrapDialog>

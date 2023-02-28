@@ -64,7 +64,7 @@ export function ListOfBooks() {
     return (
         <div>
             <Link href="#" variant="body2" onClick={handleClickOpen}>
-                Books infomation
+                Books infomations
             </Link>
             <BootstrapDialog
                 onClose={handleClose}

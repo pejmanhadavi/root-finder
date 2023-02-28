@@ -39,9 +39,9 @@ export function SearchForm() {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         const inputData = {
-            mainRoots: data.get('mainRoots').split(','),
-            firstIgnoredChars: data.get('firstIgnoredChars') ? data.get('firstIgnoredChars').split(',') : [],
-            lastIgnoredChars: data.get('lastIgnoredChars') ? data.get('lastIgnoredChars').split(',') : [],
+            mainRoots: data.get('mainRoots').split(' '),
+            firstIgnoredChars: data.get('firstIgnoredChars') ? data.get('firstIgnoredChars').split(' ') : [],
+            lastIgnoredChars: data.get('lastIgnoredChars') ? data.get('lastIgnoredChars').split(' ') : [],
             wordMaxLength: +data.get('maxLength') || 0,
             similarityPercent: +data.get('similarityPercent') || 0,
             shouldStartsWithRoots: data.get('shouldStartsWithRoots') === 'on',
@@ -64,7 +64,7 @@ export function SearchForm() {
                 label="Main roots"
                 name="mainRoots"
                 autoFocus
-                helperText="Incorrect entry."
+                helperText="Should not be empty, split multi roots with space"
             />
             {/******
             TODO: Fix margin with a best practice
@@ -80,7 +80,7 @@ export function SearchForm() {
                 onChange={handleBooksAutoCompleteChange}
                 renderInput={(params) => (
                     <TextField
-                        helperText="Check book information at the bottom of the form"
+                        helperText="Check list of books at bottom of the form"
                         {...params}
                         label="filter selected books"
                         placeholder="Choose"
@@ -93,6 +93,7 @@ export function SearchForm() {
                 name="firstIgnoredChars"
                 label="First ignored chars"
                 type="text"
+                helperText="Split multi ignored chars with space"
             />
             <TextField
                 margin="normal"
@@ -100,6 +101,7 @@ export function SearchForm() {
                 name="lastIgnoredChars"
                 label="Last ignored chars"
                 type="text"
+                helperText="Split multi ignored chars with space"
             />
             <TextField
                 margin="normal"
@@ -107,6 +109,7 @@ export function SearchForm() {
                 name="maxLength"
                 label="Max length (without ignored chars)"
                 type="number"
+                helperText="Should be a number, (Highly recommended)"
             />
             <TextField
                 margin="normal"
@@ -114,6 +117,7 @@ export function SearchForm() {
                 name="similarityPercent"
                 label="Similarity percent"
                 type="number"
+                helperText="Should be a number between 1 and 100 (Not recommended)"
             />
             <FormControlLabel
                 control={<Checkbox name="shouldStartsWithRoots" color="primary" />}
@@ -126,7 +130,7 @@ export function SearchForm() {
 
             <FormControlLabel
                 control={<Checkbox name="useSimilarity" color="primary" />}
-                label="Use similarity (not recommended)"
+                label="Use similarity (Not recommended)"
             />
 
             <Button
