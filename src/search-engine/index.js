@@ -1,4 +1,4 @@
-import { holyBooksArabicText } from '../data/holy-books-arabic-alphabet'
+import { holyBooksArabicText } from './data/holy-books-arabic-alphabet'
 // import { holyBooksTrueText } from '../data/holy-books-true-lang';
 import { stringSimilarity } from "string-similarity-js";
 
@@ -102,3 +102,10 @@ function compareStringsWithBetweenChars(root, word) {
     }
     return true
 };
+
+// eslint-disable-next-line no-restricted-globals
+addEventListener('message', e => {
+    if (e.data === 'hello') {
+      postMessage('hiya!');
+    }
+});
