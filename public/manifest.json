@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Root Finder",
+  "name": "Find holy books words roots",
   "icons": [
     {
       "src": "favicon.ico",
