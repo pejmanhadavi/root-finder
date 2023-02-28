@@ -19,18 +19,18 @@ export function SearchForm() {
     const [openVerses, setOpenVerses] = useState(false);
     const [verses, setVerses] = useState([]);
     const [books, setBooks] = useState([]);
-    const [mainRootsValue, setMainRootsValue] = useState();
+    // const [mainRootsValue, setMainRootsValue] = useState();
     const [loading, setLoading] = useState(false);
 
     const handleBooksAutoCompleteChange = (event, value) => setBooks(value.map(item => item.label));
     const handleCloseVerses = () => {
         setOpenVerses(false);
     }
-    const handleMainRootsChanges = (event) => {
-        event.preventDefault();
-        console.log(typeof mainRootsValue);
-        setMainRootsValue(event.target.value);
-    }
+    // const handleMainRootsChanges = (event) => {
+    //     event.preventDefault();
+    //     console.log(typeof mainRootsValue);
+    //     setMainRootsValue(event.target.value);
+    // }
 
     const handleSubmit = (event) => {
         event.preventDefault();
