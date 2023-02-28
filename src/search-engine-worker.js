@@ -3,6 +3,12 @@ import { holyBooksArabicText } from './data/holy-books-arabic-alphabet'
 import { stringSimilarity } from "string-similarity-js";
 
 
+// eslint-disable-next-line no-restricted-globals
+addEventListener('message', e => {
+    if (e.data === 'hello') {
+      postMessage('hiya!');
+    }
+  });
 
 export default function Search(
     {mainRoots = {},
@@ -102,9 +108,3 @@ function compareStringsWithBetweenChars(root, word) {
     }
     return true
 };
-
-// eslint-disable-next-line no-restricted-globals
-addEventListener('search', e => {
-    const verses = Search(e.data);
-    postMessage(verses);
-});

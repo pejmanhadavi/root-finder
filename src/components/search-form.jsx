@@ -10,40 +10,29 @@ import { HowToSearch } from './how-to-search';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Autocomplete from '@mui/material/Autocomplete';
-import Search from '..';
 import Worker from 'web-worker';
 
 
 
 export function SearchForm() {
-    /**********
-     * Worker
-     */
-
     const url = new URL('../worker.js', import.meta.url);
     const worker = new Worker(url);
 
-    worker.postMessage('hello');
+    worker.addEventListener('message', e => {
+        console.log(e.data)  // "hiya!"
+    });
+    worker.postMessage({json: "json"});
 
     const [formInputData, setFormInputData] = useState({});
     const [openVerses, setOpenVerses] = useState(false);
     const [verses, setVerses] = useState([]);
     const [books, setBooks] = useState([]);
-    // const [mainRootsValue, setMainRootsValue] = useState();
     const [loading, setLoading] = useState(false);
 
     const handleBooksAutoCompleteChange = (event, value) => setBooks(value.map(item => item.label));
     const handleCloseVerses = () => {
         setOpenVerses(false);
     }
-    worker.addEventListener('message', e => {
-        console.log(e.data)  // "hiya!"
-    });
-    // const handleMainRootsChanges = (event) => {
-    //     event.preventDefault();
-    //     console.log(typeof mainRootsValue);
-    //     setMainRootsValue(event.target.value);
-    // }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -60,11 +49,12 @@ export function SearchForm() {
             usedBooks: books,
         };
         setFormInputData(inputData);
-        setLoading(true);
-        const searchResult = Search(inputData);
-        setLoading(false);
-        setVerses(searchResult);
-        setOpenVerses(true);
+        // setLoading(true);
+        // const searchResult = Search(inputData);
+        worker.postMessage(inputData);
+        // setLoading(false);
+        // setVerses(searchResult);
+        // setOpenVerses(true);
     };
 
     return (
