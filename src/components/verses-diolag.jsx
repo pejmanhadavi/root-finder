@@ -1,7 +1,5 @@
 import * as React from 'react';
 import Dialog from '@mui/material/Dialog';
-import ListItemText from '@mui/material/ListItemText';
-import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import AppBar from '@mui/material/AppBar';
@@ -10,8 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
-// import TextField from '@mui/material/TextField';
-// import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -49,12 +46,13 @@ export default function FullScreenDialog({ open, handleClose, verses, inputData 
                             const foundWord = verse.substring(verse.indexOf('{') + 1, verse.indexOf('}'));
                             const lastPartOfVerse = verse.substring(verse.indexOf('}') + 1, verse.length);
                             return (
-                                <React.Fragment key={i}>
-                                    <ListItem>
-                                        <ListItemText primary={<span>{firstPartOfVerse}<span style={{ color: 'red', fontSize: '1.4rem' }}>{foundWord}</span>{lastPartOfVerse}</span>} secondary={item.address} />
-                                    </ListItem>
+                                <Box key={i} sx={{m: 8}}>
+                                        <p>{item.trueLang}</p>
+                                        <p>{<span>{firstPartOfVerse}<span style={{ color: 'red', fontSize: '1.4rem' }}>{foundWord}</span>{lastPartOfVerse}</span>}</p>
+                                        <p>{item.translation}</p>
+                                        <p>{item.address}</p>
                                     <Divider />
-                                </React.Fragment>
+                                </Box>
                             )
                         })
                     }
