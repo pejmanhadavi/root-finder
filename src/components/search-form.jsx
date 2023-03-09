@@ -10,19 +10,11 @@ import { HowToSearch } from './how-to-search';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Autocomplete from '@mui/material/Autocomplete';
-import Worker from 'web-worker';
+import { Search } from '../search-engine-worker';
 
 
 
 export function SearchForm() {
-    const url = new URL('../search-engine-worker.js', import.meta.url);
-    const worker = new Worker(url);
-
-    worker.addEventListener('message', e => {
-        setVerses(e.data);
-        setLoading(false);
-        setOpenVerses(true);
-    });
 
     const [formInputData, setFormInputData] = useState({});
     const [openVerses, setOpenVerses] = useState(false);
@@ -38,7 +30,7 @@ export function SearchForm() {
         setOpenVerses(false);
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         const inputData = {
@@ -55,7 +47,10 @@ export function SearchForm() {
         if (!mainRootsError && !firstIgnoredError && !lastIgnoredError) {
             setFormInputData(inputData);
             setLoading(true);
-            worker.postMessage(inputData);
+            const data = await Search(inputData);
+            setVerses(data);
+            setLoading(false);
+            setOpenVerses(true);
         }
     };
 
