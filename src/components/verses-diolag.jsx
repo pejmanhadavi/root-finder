@@ -43,7 +43,7 @@ export default function FullScreenDialog({ open, handleClose, verses, inputData 
                     {
                         verses.map((item, i) => {
                             return (
-                                <Box key={i} sx={{ m: 8 }}>
+                                <Box key={i} sx={{ m: 1 }}>
                                     <p>{item.trueText}</p>
                                     <p>{reactStringReplace(item.translitration, /\{(.*?)\}/, (match, i) => (
                                         <span style={{ color: 'red', fontSize: '1.4rem' }}>{match}</span>

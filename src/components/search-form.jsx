@@ -65,11 +65,8 @@ export function SearchForm() {
     const handleMainRootsChanges = (e) => {
         e.preventDefault();
         const value = e.target.value === '<empty string>' ? null : e.target.value;
-        if (
-            value.length === 0 ||
-            value === '<empty string>' ||
-            value.indexOf(' ') === 0 ||
-            value.lastIndexOf(' ') === (value.length - 1)
+        if ( value.length && (value.indexOf(' ') === 0 ||
+            value.lastIndexOf(' ') === (value.length - 1))
         ) setMainRootsError(true);
         else setMainRootsError(false);
     }
