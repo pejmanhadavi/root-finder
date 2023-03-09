@@ -50,7 +50,7 @@ export function SearchForm() {
         if (!mainRootsError && !firstIgnoredError && !lastIgnoredError && !persianWordsError) {
             setFormInputData(inputData);
             setLoading(true);
-            const data = await Search(inputData);
+            const data = Search(inputData);
             setVerses(data);
             setLoading(false);
             setOpenVerses(true);

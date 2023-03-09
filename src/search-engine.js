@@ -13,9 +13,6 @@ export const Search = (
         usedBooks = [],
         translationWords = [],
     }) => {
-
-
-    return new Promise(resolve => {
         similarityPercent = similarityPercent && similarityPercent / 100;
 
         /**********
@@ -103,8 +100,7 @@ export const Search = (
             if (lineData.selected)
                 data.push(lineData)
         });
-        resolve(data);
-    })
+        return data
 }
 
 const compareStringsWithBetweenChars = (root, word) => {
