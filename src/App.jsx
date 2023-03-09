@@ -14,7 +14,7 @@ import { SearchForm } from './components/search-form';
 
 const theme = createTheme();
 
-export default function SignIn() {
+export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
