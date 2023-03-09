@@ -24,6 +24,7 @@ export function SearchForm() {
     const [mainRootsError, setMainRootsError] = useState(true);
     const [firstIgnoredError, setFirstIgnoredError] = useState(false);
     const [lastIgnoredError, setLastIgnoredError] = useState(false);
+    const [persianWordsError, setPersianWordsError] = useState(false);
 
     const handleBooksAutoCompleteChange = (event, value) => setBooks(value.map(item => item.label));
     const handleCloseVerses = () => {
@@ -37,6 +38,7 @@ export function SearchForm() {
             mainRoots: data.get('mainRoots').split(' '),
             firstIgnoredChars: data.get('firstIgnoredChars') ? data.get('firstIgnoredChars').split(' ') : [],
             lastIgnoredChars: data.get('lastIgnoredChars') ? data.get('lastIgnoredChars').split(' ') : [],
+            translationWords: data.get('translationWords') ? data.get('translationWords').split(' ') : [],
             wordMaxLength: +data.get('maxLength') || 0,
             similarityPercent: +data.get('similarityPercent') || 0,
             shouldStartsWithRoots: data.get('shouldStartsWithRoots') === 'on',
@@ -44,7 +46,7 @@ export function SearchForm() {
             useSimilarity: data.get('useSimilarity') === 'on',
             usedBooks: books,
         };
-        if (!mainRootsError && !firstIgnoredError && !lastIgnoredError) {
+        if (!mainRootsError && !firstIgnoredError && !lastIgnoredError && !persianWordsError) {
             setFormInputData(inputData);
             setLoading(true);
             const data = await Search(inputData);
@@ -73,6 +75,15 @@ export function SearchForm() {
             value.lastIndexOf(' ') === (value.length - 1))
         ) setFirstIgnoredError(true);
         else setFirstIgnoredError(false);
+    }
+
+    const handlePersianWordsChanges = (e) => {
+        e.preventDefault();
+        const value = e.target.value;
+        if (value.length && (value.indexOf(' ') === 0 ||
+            value.lastIndexOf(' ') === (value.length - 1))
+        ) setPersianWordsError(true);
+        else setPersianWordsError(false);
     }
 
     const handleLastIgnoredChanges = (e) => {
@@ -137,6 +148,16 @@ export function SearchForm() {
                 label="Last ignored chars"
                 type="text"
                 helperText="Split multi ignored chars with space"
+            />
+            <TextField
+                margin="normal"
+                fullWidth
+                onChange={handlePersianWordsChanges}
+                error={persianWordsError}
+                name="translationWords"
+                label="Translation words"
+                type="text"
+                helperText="Split multi persian words with space"
             />
             <TextField
                 margin="normal"

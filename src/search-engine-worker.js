@@ -13,6 +13,7 @@ export const Search = (
         firstIgnoredChars = [],
         lastIgnoredChars = [],
         usedBooks = [],
+        translationWords = [],
     }) => {
 
 
