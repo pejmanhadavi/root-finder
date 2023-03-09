@@ -64,15 +64,6 @@ export default function FullScreenDialog({ open, handleClose, verses, inputData 
                         verses.map((item, i) => {
                             return (
                                 <Box key={i} sx={{ m: 1 }}>
-                                    <FormControlLabel control={<Checkbox 
-                                    value={`
-${item.trueText}
-${item.translitration}
-${item.translation}
-${item.bookShortKey}, ${item.chapterNumber}, ${item.verseNumber}
-                                        `}
-                                    onChange={handleCheckBoxOnChange}
-                                    />}/>
                                         <p>{item.trueText}</p>
                                         <p>{reactStringReplace(item.translitration, /\{(.*?)\}/, (match, i) => (
                                             <span style={{ color: 'red', fontSize: '1.4rem' }}>{match}</span>
@@ -80,7 +71,17 @@ ${item.bookShortKey}, ${item.chapterNumber}, ${item.verseNumber}
                                         <p>{reactStringReplace(item.translation, /\{(.*?)\}/, (match, i) => (
                                             <span style={{ color: 'blue', fontSize: '1.4rem' }}>{match}</span>
                                         ))}</p>
-                                        <p>{`${item.bookShortKey}, ${item.chapterNumber}, ${item.verseNumber}`}</p>
+
+                                    <FormControlLabel control={<Checkbox 
+                                    label={'حثتپشد حثتپشد'}
+                                    value={`
+${item.trueText}
+${item.translitration}
+${item.translation}
+${item.bookShortKey}, ${item.chapterNumber}, ${item.verseNumber}
+                                        `}
+                                    onChange={handleCheckBoxOnChange}
+                                    />} label={`${item.bookShortKey}, ${item.chapterNumber}, ${item.verseNumber}`}/>
                                     <Divider />
                                 </Box>
                             )
