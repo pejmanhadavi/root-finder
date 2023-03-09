@@ -42,7 +42,6 @@ export function SearchForm() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log(data.get('firstIgnoredChars'));
         const inputData = {
             mainRoots: data.get('mainRoots') ? data.get('mainRoots').split(' ') : [],
             firstIgnoredChars: data.get('firstIgnoredChars') ? data.get('firstIgnoredChars').split(' ') : [],
