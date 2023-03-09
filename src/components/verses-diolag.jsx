@@ -74,8 +74,7 @@ export default function FullScreenDialog({ open, handleClose, verses, inputData 
                                             <span style={{ color: 'blue', fontSize: '1.4rem' }}>{match}</span>
                                         ))}</p>
 
-                                    <FormControlLabel control={<Checkbox 
-                                    label={'حثتپشد حثتپشد'}
+                                    <FormControlLabel control={<Checkbox
                                     value={`
 ${item.trueText}
 ${item.translitration}
