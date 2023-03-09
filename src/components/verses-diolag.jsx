@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import { Box } from '@mui/material';
+import reactStringReplace from 'react-string-replace';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -41,16 +42,16 @@ export default function FullScreenDialog({ open, handleClose, verses, inputData 
                 <List>
                     {
                         verses.map((item, i) => {
-                            const verse = item.translitration;
-                            const firstPartOfVerse = verse.substring(0, verse.indexOf('{'));
-                            const foundWord = verse.substring(verse.indexOf('{') + 1, verse.indexOf('}'));
-                            const lastPartOfVerse = verse.substring(verse.indexOf('}') + 1, verse.length);
                             return (
-                                <Box key={i} sx={{m: 8}}>
-                                        <p>{item.trueLang}</p>
-                                        <p>{<span>{firstPartOfVerse}<span style={{ color: 'red', fontSize: '1.4rem' }}>{foundWord}</span>{lastPartOfVerse}</span>}</p>
-                                        <p>{item.translation}</p>
-                                        <p>{item.address}</p>
+                                <Box key={i} sx={{ m: 8 }}>
+                                    <p>{item.trueLang}</p>
+                                    <p>{reactStringReplace(item.translitration, /\{(.*?)\}/, (match, i) => (
+                                        <span style={{ color: 'red', fontSize: '1.4rem' }}>{match}</span>
+                                    ))}</p>
+                                    <p>{reactStringReplace(item.translation, /\{(.*?)\}/, (match, i) => (
+                                        <span style={{ color: 'blue', fontSize: '1.4rem' }}>{match}</span>
+                                    ))}</p>
+                                    <p>{item.address}</p>
                                     <Divider />
                                 </Box>
                             )
