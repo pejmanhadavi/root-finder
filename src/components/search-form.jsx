@@ -21,7 +21,7 @@ export function SearchForm() {
     const [verses, setVerses] = useState([]);
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [mainRootsError, setMainRootsError] = useState(true);
+    const [mainRootsError, setMainRootsError] = useState(false);
     const [firstIgnoredError, setFirstIgnoredError] = useState(false);
     const [lastIgnoredError, setLastIgnoredError] = useState(false);
     const [persianWordsError, setPersianWordsError] = useState(false);
@@ -34,8 +34,9 @@ export function SearchForm() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
+        console.log(data.get('firstIgnoredChars'));
         const inputData = {
-            mainRoots: data.get('mainRoots').split(' '),
+            mainRoots: data.get('mainRoots') ? data.get('mainRoots').split(' ') : [],
             firstIgnoredChars: data.get('firstIgnoredChars') ? data.get('firstIgnoredChars').split(' ') : [],
             lastIgnoredChars: data.get('lastIgnoredChars') ? data.get('lastIgnoredChars').split(' ') : [],
             translationWords: data.get('translationWords') ? data.get('translationWords').split(' ') : [],
@@ -58,7 +59,7 @@ export function SearchForm() {
 
     const handleMainRootsChanges = (e) => {
         e.preventDefault();
-        const value = e.target.value;
+        const value = e.target.value === '<empty string>' ? null : e.target.value;
         if (
             value.length === 0 ||
             value === '<empty string>' ||
@@ -70,7 +71,7 @@ export function SearchForm() {
 
     const handleFirstIgnoredChanges = (e) => {
         e.preventDefault();
-        const value = e.target.value;
+        const value = e.target.value === '<empty string>' ? null : e.target.value;
         if (value.length && (value.indexOf(' ') === 0 ||
             value.lastIndexOf(' ') === (value.length - 1))
         ) setFirstIgnoredError(true);
@@ -79,7 +80,7 @@ export function SearchForm() {
 
     const handlePersianWordsChanges = (e) => {
         e.preventDefault();
-        const value = e.target.value;
+        const value = e.target.value === '<empty string>' ? null : e.target.value;
         if (value.length && (value.indexOf(' ') === 0 ||
             value.lastIndexOf(' ') === (value.length - 1))
         ) setPersianWordsError(true);
@@ -88,7 +89,7 @@ export function SearchForm() {
 
     const handleLastIgnoredChanges = (e) => {
         e.preventDefault();
-        const value = e.target.value;
+        const value = e.target.value === '<empty string>' ? null : e.target.value;
         if (value.length && (value.indexOf(' ') === 0 ||
             value.lastIndexOf(' ') === (value.length - 1))
         ) setLastIgnoredError(true);
