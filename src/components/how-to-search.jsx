@@ -81,6 +81,9 @@ export function HowToSearch() {
                         Last ignored chars: ان اون یت
                     </Typography>
                     <Typography gutterBottom>
+                        Translation words: چاقو کارد شمشیر
+                    </Typography>
+                    <Typography gutterBottom>
                         Max length: 5
                     </Typography>
                     <Typography gutterBottom>

@@ -1,6 +1,4 @@
-import { holyBooksArabicText } from './data/holy-books-arabic-text'
-import { holyBooksTrueText } from './data/holy-books-true-text';
-import { holyBooksPersianText } from './data/holy-books-persian-text';
+import { data as booksData } from './data/data-object';
 import { stringSimilarity } from "string-similarity-js";
 
 export const Search = (
@@ -18,9 +16,6 @@ export const Search = (
 
 
     return new Promise(resolve => {
-        const translitrationsLinesArray = holyBooksArabicText.split('\n');
-        const trueLangsLinesArray = holyBooksTrueText.split('\n');
-        const persianTranslationLinesArray = holyBooksPersianText.split('\n');
         similarityPercent = similarityPercent && similarityPercent / 100;
 
         /**********
@@ -28,11 +23,9 @@ export const Search = (
          */
 
         const data = [];
-        translitrationsLinesArray.forEach(translitraionLine => {
-            if (usedBooks.length && !usedBooks.some(item => translitraionLine.includes(item))) return;
-            const address = translitraionLine.substring(0, 16);
-            const translitrationVerse = translitraionLine.substring(16);
-            const arrayOfWords = translitrationVerse.split(' ');
+        booksData.forEach(lineData => {
+            if (usedBooks.length && !usedBooks.some(item => lineData.bookShortKey === item)) return;
+            const arrayOfWords = lineData.translitration.split(' ');
 
             arrayOfWords.forEach(word => {
                 const initialWord = word;
@@ -79,14 +72,11 @@ export const Search = (
                     /*******
                      * Mention word in verses
                      */
-                    const trueLangVerse = trueLangsLinesArray.find(line => line.includes(address))?.substring(15);
-                    // console.log(persianTranslationLinesArray);
-                    const persianVerse = persianTranslationLinesArray.find(line => line.includes(address))?.substring(15);
                     const dataLine = {
-                        address,
-                        trueLang: trueLangVerse,
-                        translitration: translitrationVerse.replace(initialWord, `{${initialWord}}`),
-                        translation: persianVerse,
+                        address: `${lineData.bookShortKey}, ${lineData.chapterNumber}, ${lineData.verseNumber}`,
+                        trueLang: lineData.trueText,
+                        translitration: lineData.translitration.replace(initialWord, `{${initialWord}}`),
+                        translation: lineData.translation,
                     };
                     data.push(dataLine);
                 }
