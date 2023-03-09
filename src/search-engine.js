@@ -26,6 +26,9 @@ export const Search = (
         booksData.forEach(lineData => {
             if (usedBooks.length && !usedBooks.some(item => lineData.bookShortKey === item)) return;
             const arrayOfWords = lineData.translitration.split(' ');
+            /********
+             * Check if there is translation contains one of users translations search words
+             */
             if (translationWords.length && lineData.translation) {
                 const words = translationWords.filter(item => lineData.translation.includes(item));
                 if (words.length) {

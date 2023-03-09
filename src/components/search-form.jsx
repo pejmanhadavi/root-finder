@@ -10,7 +10,7 @@ import { HowToSearch } from './how-to-search';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Autocomplete from '@mui/material/Autocomplete';
-import { Search } from '../search-engine-worker';
+import { Search } from '../search-engine';
 
 
 
@@ -213,6 +213,7 @@ export function SearchForm() {
 
 
 const listOfBooksKeys = [
+    { label: 'GEN' },
     { label: 'EXO' },
     { label: 'LEV' },
     { label: 'NUM' },
