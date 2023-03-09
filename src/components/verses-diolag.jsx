@@ -44,14 +44,14 @@ export default function FullScreenDialog({ open, handleClose, verses, inputData 
                         verses.map((item, i) => {
                             return (
                                 <Box key={i} sx={{ m: 8 }}>
-                                    <p>{item.trueLang}</p>
+                                    <p>{item.trueText}</p>
                                     <p>{reactStringReplace(item.translitration, /\{(.*?)\}/, (match, i) => (
                                         <span style={{ color: 'red', fontSize: '1.4rem' }}>{match}</span>
                                     ))}</p>
                                     <p>{reactStringReplace(item.translation, /\{(.*?)\}/, (match, i) => (
                                         <span style={{ color: 'blue', fontSize: '1.4rem' }}>{match}</span>
                                     ))}</p>
-                                    <p>{item.address}</p>
+                                    <p>{`${item.bookShortKey}, ${item.chapterNumber}, ${item.verseNumber}`}</p>
                                     <Divider />
                                 </Box>
                             )

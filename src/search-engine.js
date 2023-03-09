@@ -35,18 +35,17 @@ export const Search = (
                     words.forEach(word => {
                         translation = translation.replaceAll(word, `{${word}}`)
                     });
-                    data.push({
-                        address: `${lineData.bookShortKey}, ${lineData.chapterNumber}, ${lineData.verseNumber}`,
-                        trueLang: lineData.trueText,
-                        translitration: lineData.translitration,
+                    lineData = {
+                        ...lineData,
                         translation: translation,
-                    });
+                        selected: true,
+                    };
                 }
             }
 
             if (mainRoots.length && lineData.translitration) {
                 const arrayOfWords = lineData.translitration.split(' ');
-                arrayOfWords.forEach(word => {
+                arrayOfWords.forEach((word, index) => {
                     const initialWord = word;
                     /********
                      * Remove first chars
@@ -91,17 +90,20 @@ export const Search = (
                         /*******
                          * Mention word in verses
                          */
-                        data.push({
-                            address: `${lineData.bookShortKey}, ${lineData.chapterNumber}, ${lineData.verseNumber}`,
-                            trueLang: lineData.trueText,
-                            translitration: lineData.translitration.replace(initialWord, `{${initialWord}}`),
-                            translation: lineData.translation,
-                        });
+                        arrayOfWords[index] = `{${initialWord}}`;
+                        lineData = {
+                            ...lineData,
+                            translitration: arrayOfWords.join(' '),
+                            selected: true,
+                        };
                     }
                 });
-                resolve(data);
             }
+            // Here should push in array
+            if (lineData.selected)
+                data.push(lineData)
         });
+        resolve(data);
     })
 }
 
