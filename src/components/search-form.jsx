@@ -10,11 +10,19 @@ import { HowToSearch } from './how-to-search';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Autocomplete from '@mui/material/Autocomplete';
-import { Search } from '../search-engine';
+import Worker from 'web-worker';
 
 
 
 export function SearchForm() {
+    const url = new URL('../search-engine.js', import.meta.url);
+    const worker = new Worker(url);
+
+    worker.addEventListener('message', e => {
+        setVerses(e.data);
+        setLoading(false);
+        setOpenVerses(true);
+    });
 
     const [formInputData, setFormInputData] = useState({});
     const [openVerses, setOpenVerses] = useState(false);
@@ -50,10 +58,7 @@ export function SearchForm() {
         if (!mainRootsError && !firstIgnoredError && !lastIgnoredError && !persianWordsError) {
             setFormInputData(inputData);
             setLoading(true);
-            const data = Search(inputData);
-            setVerses(data);
-            setLoading(false);
-            setOpenVerses(true);
+            worker.postMessage(inputData);
         }
     };
 
