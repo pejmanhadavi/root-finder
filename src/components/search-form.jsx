@@ -10,20 +10,11 @@ import { HowToSearch } from './how-to-search';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Autocomplete from '@mui/material/Autocomplete';
-import Worker from 'web-worker';
+import { Search } from '../search-engine';
 
 
 
 export function SearchForm() {
-    const url = new URL('../search-engine.js', import.meta.url);
-    const worker = new Worker(url);
-
-    worker.addEventListener('message', e => {
-        setVerses(e.data);
-        setLoading(false);
-        setOpenVerses(true);
-    });
-
     const [formInputData, setFormInputData] = useState({});
     const [openVerses, setOpenVerses] = useState(false);
     const [verses, setVerses] = useState([]);
@@ -57,7 +48,11 @@ export function SearchForm() {
         if (!mainRootsError && !firstIgnoredError && !lastIgnoredError && !persianWordsError) {
             setFormInputData(inputData);
             setLoading(true);
-            worker.postMessage(inputData);
+            Search(inputData).then(data => {
+                setVerses(data);
+                setLoading(false);
+                setOpenVerses(true);
+            });
         }
     };
 
@@ -168,6 +163,7 @@ export function SearchForm() {
                 label="Max length (without ignored chars)"
                 type="number"
                 helperText="Should be a number, (Highly recommended)"
+                value={5}
             />
             <TextField
                 margin="normal"
@@ -178,7 +174,7 @@ export function SearchForm() {
                 helperText="Should be a number between 1 and 100 (Not recommended)"
             />
             <FormControlLabel
-                control={<Checkbox name="shouldStartsWithRoots" color="primary" />}
+                control={<Checkbox name="shouldStartsWithRoots" color="primary" defaultChecked/>}
                 label="Should starts with roots"
             />
             <FormControlLabel
