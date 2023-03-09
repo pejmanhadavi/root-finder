@@ -26,6 +26,17 @@ export const Search = (
         booksData.forEach(lineData => {
             if (usedBooks.length && !usedBooks.some(item => lineData.bookShortKey === item)) return;
             const arrayOfWords = lineData.translitration.split(' ');
+            if (translationWords.length) {
+                const words = translationWords.filter(item => lineData.translation.includes(item));
+                if (words.length) {
+                    data.push({
+                        address: `${lineData.bookShortKey}, ${lineData.chapterNumber}, ${lineData.verseNumber}`,
+                        trueLang: lineData.trueText,
+                        translitration: lineData.translitration,
+                        translation: lineData.translation,
+                    });
+                }
+            }
 
             arrayOfWords.forEach(word => {
                 const initialWord = word;
@@ -72,13 +83,12 @@ export const Search = (
                     /*******
                      * Mention word in verses
                      */
-                    const dataLine = {
+                    data.push({
                         address: `${lineData.bookShortKey}, ${lineData.chapterNumber}, ${lineData.verseNumber}`,
                         trueLang: lineData.trueText,
                         translitration: lineData.translitration.replace(initialWord, `{${initialWord}}`),
                         translation: lineData.translation,
-                    };
-                    data.push(dataLine);
+                    });
                 }
                 resolve(data);
             })
