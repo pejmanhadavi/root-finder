@@ -26,14 +26,18 @@ export const Search = (
         booksData.forEach(lineData => {
             if (usedBooks.length && !usedBooks.some(item => lineData.bookShortKey === item)) return;
             const arrayOfWords = lineData.translitration.split(' ');
-            if (translationWords.length) {
+            if (translationWords.length && lineData.translation) {
                 const words = translationWords.filter(item => lineData.translation.includes(item));
                 if (words.length) {
+                    let translation = lineData.translation;
+                    words.forEach(word => {
+                        translation = translation.replaceAll(word, `{${word}}`)
+                    });
                     data.push({
                         address: `${lineData.bookShortKey}, ${lineData.chapterNumber}, ${lineData.verseNumber}`,
                         trueLang: lineData.trueText,
                         translitration: lineData.translitration,
-                        translation: lineData.translation,
+                        translation: translation,
                     });
                 }
             }
