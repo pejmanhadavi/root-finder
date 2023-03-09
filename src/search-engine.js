@@ -90,8 +90,11 @@ export const Search = (
                              * Mention word in verses
                              */
                             arrayOfWords[index] = `{${initialWord}}`;
+                            const trueTextArray = lineData.trueText.split(' ');
+                            trueTextArray[index] = `{${trueTextArray[index]}}`
                             lineData = {
                                 ...lineData,
+                                trueText: trueTextArray.join(' '),
                                 translitration: arrayOfWords.join(' '),
                                 selected: true,
                             };
