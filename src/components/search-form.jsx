@@ -163,7 +163,7 @@ export function SearchForm() {
                 label="Max length (without ignored chars)"
                 type="number"
                 helperText="Should be a number, (Highly recommended)"
-                value={5}
+                defaultValue={5}
             />
             <TextField
                 margin="normal"

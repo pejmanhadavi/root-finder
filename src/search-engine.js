@@ -15,17 +15,15 @@ export const Search = (
     }) => {
     return new Promise(resolve => {
         setTimeout(() => {
-            
             similarityPercent = similarityPercent && similarityPercent / 100;
-        
+    
             /**********
              * Read books
              */
-        
+    
             const data = [];
-            for (let lineIndex = 0; lineIndex < booksData.length; lineIndex++) {
-                let lineData = booksData[lineIndex];
-                if (usedBooks.length && !usedBooks.some(item => lineData.bookShortKey === item)) continue;
+            booksData.forEach(lineData => {
+                if (usedBooks.length && !usedBooks.some(item => lineData.bookShortKey === item)) return;
                 /********
                  * Check if there is translation contains one of users translations search words
                  */
@@ -33,10 +31,9 @@ export const Search = (
                     const words = translationWords.filter(item => lineData.translation.includes(item));
                     if (words.length) {
                         let translation = lineData.translation;
-                        for (let wordIndex = 0; wordIndex < words.length; wordIndex++) {
-                            const word = words[wordIndex];
-                            translation = translation.replaceAll(word, `{${word}}`);
-                        }
+                        words.forEach(word => {
+                            translation = translation.replaceAll(word, `{${word}}`)
+                        });
                         lineData = {
                             ...lineData,
                             translation: translation,
@@ -44,11 +41,10 @@ export const Search = (
                         };
                     }
                 }
-        
+    
                 if (mainRoots.length && lineData.translitration) {
                     const arrayOfWords = lineData.translitration.split(' ');
-                    for (let wordIndex = 0; wordIndex < arrayOfWords.length; wordIndex++) {
-                        let word = arrayOfWords[wordIndex];
+                    arrayOfWords.forEach((word, index) => {
                         const initialWord = word;
                         /********
                          * Remove first chars
@@ -93,19 +89,19 @@ export const Search = (
                             /*******
                              * Mention word in verses
                              */
-                            arrayOfWords[wordIndex] = `{${initialWord}}`;
+                            arrayOfWords[index] = `{${initialWord}}`;
                             lineData = {
                                 ...lineData,
                                 translitration: arrayOfWords.join(' '),
                                 selected: true,
                             };
                         }
-                    }
+                    });
                 }
                 // Here should push in array
                 if (lineData.selected)
                     data.push(lineData)
-            }
+            });
             resolve(data);
         }, 0);
     })
